@@ -6,9 +6,14 @@
             <v-btn block color="primary" @click="AddScoreModule">Add Score</v-btn>
             <v-btn block color="primary" @click="AddTranslationModule">Add Translation</v-btn>
             <v-btn block color="primary" @click="AddSelectorModule">Add Selector</v-btn>
-            <v-btn block color="primary" @click="AddTextModificationModule">Add Text-Modifier</v-btn>
+            <v-btn block>Add Text-Modifier</v-btn>
         </div>
-        <v-btn color="primary" @click="Generate" :disabled="Modules.length == 0">Generate</v-btn>
+        <v-btn style="margin-top: 5px;" color="primary" @click="Generate" :disabled="Modules.length == 0">Generate</v-btn>
+        <v-btn style="margin-top: 5px;" @click="CopyOutput" :disabled="GeneratedRawtext == 'No Data'">Copy Output</v-btn>
+        <br></br>
+        <div class="Output">
+            <p>{{ GeneratedRawtext }}</p>
+        </div>
         <div class="RTEditor">
             <h2>Editor</h2>
             <transition-group name="RT-flip-list" tag="v-card">
@@ -38,17 +43,35 @@
             </v-card>
         </transition-group>
         </div>
+        <div class="Toast" id="Popup">
+            <h2>Copied</h2>
+        </div>
     </div>
 </template>
 
 <script>
 export default {
     data: () => ({
-        Modules: []
+        Modules: [],
+        GeneratedRawtext: "No Data"
     }),
     methods: {
         Generate() {
-
+            var GeneratedModules = "";
+            this.Modules.forEach(module => {
+                GeneratedModules += `${module.Construct()},`;
+            });
+            GeneratedModules = GeneratedModules.slice(0,-1);
+            this.GeneratedRawtext = `{"rawtext":[${GeneratedModules}]}`;
+        },
+        CopyOutput() {
+            navigator.clipboard.writeText(this.GeneratedRawtext);
+            var Toast = document.getElementById("Popup");
+            Toast.style.animation = "PopupAnimation 2s";
+            Toast.addEventListener("animationend", (ev) => {
+                ev.target.style.animation = "";
+                Toast.removeEventListener("animationend", (ev) => { });
+            })
         },
         AddMessageModule() {
             this.Modules.push(new Message());
@@ -157,7 +180,7 @@ class Selector {
     constructor() {
         this.Id = crypto.randomUUID(),
         this.Type = ModuleTypes.SELECTOR;
-        this.Selector = "@e[type=\"player\"]";
+        this.Selector = "@e[type=player]";
     }
 
     Construct() {
