@@ -9,47 +9,60 @@
         <v-btn style="margin-bottom:10px" color="primary" block @click="OpenStructureViewerTool">Structure Viewer</v-btn>
         <v-btn style="margin-bottom:10px" color="primary" block @click="OpenSelectorGeneratorTool">Selector Generator</v-btn>
         <v-btn style="margin-bottom:10px" color="primary" block @click="OpenTroubleshooterTool">FAQ Troubleshooter</v-btn>
+        <v-btn style="margin-bottom:10px" color="primary" block @click="OpenRecipeGeneratorTool">Recipe Generator</v-btn>
     </v-container>
 </template>
 
 <script>
-import { ContentTab, openTab, addTab, Tab } from "@bridge/tab";
-import { Loop, Id, RawText, GameTestUI, RenderOffset, StructureViewer, Selector, TroubleShooter } from "@bridge/ui";
+import { ContentTab, addTab, Tab, getCurrentTabSystem } from "@bridge/tab";
+import { Loop, Id, RawText, GameTestUI, RenderOffset, StructureViewer, Selector, TroubleShooter, Recipe } from "@bridge/ui";
 import { readdir } from "@bridge/fs";
 
 //ESM Import for local script files do not work. Please check issue #596
 //https://github.com/bridge-core/editor/issues/596
-import { Test } from "../scripts/main.js";
+//import { Test } from "../scripts/main.js";
 //The error only occurs when you reference a variable/class from the import.
-console.log(new Test());
+//console.log(new Test());
 
 export default
 {
     methods:
     {
-        async OpenLoopTool()
+        OpenLoopTool()
         {
+            addTab(new LoopTab(getCurrentTabSystem()));
         },
-        async OpenIdTool()
+        OpenIdTool()
         {
+            addTab(new IdTab(getCurrentTabSystem()));
         },
-        async OpenRawtextTool()
+        OpenRawtextTool()
         {
+            addTab(new RawTextTab(getCurrentTabSystem()));
         },
-        async OpenGametestUITool()
+        OpenGametestUITool()
         {
+            addTab(new GameTestUITab(getCurrentTabSystem()));
         },
-        async OpenRenderOffsetTool()
+        OpenRenderOffsetTool()
         {
+            addTab(new RenderOffsetTab(getCurrentTabSystem()));
         },
-        async OpenStructureViewerTool()
+        OpenStructureViewerTool()
         {
+            addTab(new StructureViewerTab(getCurrentTabSystem()));
         },
-        async OpenSelectorGeneratorTool()
+        OpenSelectorGeneratorTool()
         {
+            addTab(new SelectorTab(getCurrentTabSystem()));
         },
-        async OpenTroubleshooterTool()
+        OpenTroubleshooterTool()
         {
+            addTab(new TroubleShooterTab(getCurrentTabSystem()));
+        },
+        OpenRecipeGeneratorTool()
+        {
+            addTab(new RecipeTab(getCurrentTabSystem()));
         }
     }
 }
@@ -206,6 +219,25 @@ class TroubleShooterTab extends ContentTab
     }
     get name() {
         return 'FAQ Troubleshooter'
+    }
+}
+
+class RecipeTab extends ContentTab
+{
+    component = Recipe;
+    type = "RecipeTab";
+
+    async isFor() {
+        return false
+    }
+    get icon() {
+        return 'mdi-tools'
+    }
+    get iconColor() {
+        return 'warning'
+    }
+    get name() {
+        return 'Recipe Generator'
     }
 }
 
