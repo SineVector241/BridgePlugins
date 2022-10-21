@@ -21,12 +21,12 @@
         </div>
         <div v-else>
             <v-btn icon @click="ShowInfoWindow('Loop Start-At Help','Loop Start-At is where you input which number you want the loop to start at.')"><v-icon>mdi-information-outline</v-icon></v-btn>
-            <v-text-field type="number" min="0" outlined label="Loop Start-At" v-model="loopStart"></v-text-field>
+            <v-text-field type="number" min="0" outlined label="Loop Start-At" v-model="LTloopStart"></v-text-field>
             <v-btn icon @click="ShowInfoWindow('Loop End-At Help','Loop End-At is where you input which number you want the loop to end at.')"><v-icon>mdi-information-outline</v-icon></v-btn>
-            <v-text-field type="number" min="1" outlined label="Loop End-At" v-model="loopEnd"></v-text-field>
+            <v-text-field type="number" min="1" outlined label="Loop End-At" v-model="LTloopEnd"></v-text-field>
             <v-btn icon @click="ShowInfoWindow('Output Template','Output Template is where you specify the output of the loop. The value outputted from the list is {{out}} for example /say {{out}}')"><v-icon>mdi-information-outline</v-icon></v-btn>
             <v-text-field outlined label="Output Template" v-model="numberOutputTemplate"></v-text-field>
-            <v-btn color="primary" @click="GenerateNumberOutput" :disabled="!numberOutputTemplate || loopStart >= loopEnd || loopStart < 0">Generate</v-btn>
+            <v-btn color="primary" @click="GenerateNumberOutput" :disabled="!numberOutputTemplate || LTloopStart >= LTloopEnd || LTloopStart < 0">Generate</v-btn>
             <v-btn @click="CopyNumberOutput" :disabled="NumberOutput == 'No Data' || !NumberOutput">Copy Output</v-btn>
             <br></br>
             <div class="Output"><pre ref="text">{{ NumberOutput }}</pre></div>
@@ -48,8 +48,8 @@ export default
             split:",",
             outputTemplate:"/say {{out}}",
             numberOutputTemplate:"/say {{out}}",
-            loopStart: 1,
-            loopEnd:10,
+            LTloopStart: 1,
+            LTloopEnd:10,
             ListOutput:"No Data",
             NumberOutput: "No Data"
         }),
@@ -64,7 +64,9 @@ export default
             },
             GenerateNumberOutput() {
                 this.NumberOutput = "";
-                for(let i = this.loopStart; i <= this.loopEnd; i++)
+                this.LTloopStart = parseInt(this.LTloopStart);
+                this.LTloopEnd = parseInt(this.LTloopEnd);
+                for(let i = this.LTloopStart; i <= this.LTloopEnd; i++)
                 {
                     this.NumberOutput += `${this.numberOutputTemplate.replace("{{out}}", i)}\n`
                 }

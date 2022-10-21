@@ -1,0 +1,62 @@
+<html>
+
+<body style="background-color: chartreuse">
+    <div class="RecipeBackground">
+        <div class="ItemCells">
+            <div class="ItemCell"></div>
+            <div class="ItemCell"></div>
+            <div class="ItemCell"></div>
+            <div class="ItemCell"></div>
+            <div class="ItemCell"></div>
+            <div class="ItemCell"></div>
+            <div class="ItemCell"></div>
+            <div class="ItemCell"></div>
+            <div class="ItemCell"></div>
+        </div>
+    </div>
+    <div class="Items">
+        <p draggable="true">Test</p>
+    </div>
+</body>
+
+<style>
+    .RecipeBackground {
+        margin: auto;
+        border-style: solid;
+        -o-border-image: url(dialog_background_opaque.png) 4;
+        -webkit-border-image: url(dialog_background_opaque.png) 4;
+        -moz-border-image: url(dialog_background_opaque.png) 4;
+        border-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAklEQVR4AewaftIAAABzSURBVKXBQRHDMAxFwfdVcEFgPi0CIzACATEsVZ20k+RUZ7QrroI14kscIrFCEkmkB7tIrNq2jTHGE3gJiMTPnJN/eu98uDvGyZyTu4wio8goMoqMIqPIKDJu6r1zJnbRWuMud0ccorXGKncnSVwF60R6A/M7I8X3ISC0AAAAAElFTkSuQmCC") 7 fill;
+        border-width: 18px 18px 18px 18px;
+        image-rendering: pixelated;
+        height: 300px;
+        width: 500px;
+    }
+
+    .ItemCell {
+        margin: auto;
+        border-style: solid;
+        -o-border-image: url(dialog_background_opaque.png) 1;
+        -webkit-border-image: url(dialog_background_opaque.png) 1;
+        -moz-border-image: url(dialog_background_opaque.png) 1;
+        border-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAA7SURBVHjaYgwLDvvPQCYoKC5gYGFgYGDQ1NEkywBLS0sGJgYKwagBowaMGgAFx44d+08JAAAAAP//AwCbM0Ov7t4h/QAAAABJRU5ErkJggg==") 6 fill;
+        border-width: 18px 18px 18px 18px;
+        image-rendering: pixelated;
+        height: 20px;
+        width: 20px;
+    }
+
+    .ItemCells {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        column-gap: 0;
+        row-gap: 0;
+        justify-content: center;
+    }
+
+    .ItemCell:hover {
+        border-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAADhJREFUOE9jDAsO+89AJigoLmBgBBlwRusIWUbcbXo6asBoGDCMpgMGKoXBsWPH/ltaWpKVG0GaAIa0WybCkMlcAAAAAElFTkSuQmCC") 6 fill;
+    }
+</style>
+
+</html>

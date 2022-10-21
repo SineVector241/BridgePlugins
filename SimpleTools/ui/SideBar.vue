@@ -6,10 +6,10 @@
         <v-btn style="margin-bottom:10px" color="primary" block @click="OpenRawtextTool">JSON Rawtext Generator</v-btn>
         <v-btn style="margin-bottom:10px" color="primary" block @click="OpenGametestUITool">Gametest UI Generator</v-btn>
         <v-btn style="margin-bottom:10px" color="primary" block @click="OpenRenderOffsetTool">Render Offset Corrector</v-btn>
-        <v-btn style="margin-bottom:10px" color="primary" block @click="OpenStructureViewerTool">Structure Viewer</v-btn>
+        <!--<v-btn style="margin-bottom:10px" color="primary" block @click="OpenStructureViewerTool">Structure Viewer</v-btn> -->
         <v-btn style="margin-bottom:10px" color="primary" block @click="OpenSelectorGeneratorTool">Selector Generator</v-btn>
-        <v-btn style="margin-bottom:10px" color="primary" block @click="OpenTroubleshooterTool">FAQ Troubleshooter</v-btn>
-        <v-btn style="margin-bottom:10px" color="primary" block @click="OpenRecipeGeneratorTool">Recipe Generator</v-btn>
+        <!-- <v-btn style="margin-bottom:10px" color="primary" block @click="OpenTroubleshooterTool">FAQ Troubleshooter</v-btn> -->
+        <!-- <v-btn style="margin-bottom:10px" color="primary" block @click="OpenRecipeGeneratorTool">Recipe Generator</v-btn> -->
     </v-container>
 </template>
 
