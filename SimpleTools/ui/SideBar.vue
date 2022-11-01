@@ -9,13 +9,15 @@
         <!-- <v-btn style="margin-bottom:10px" color="primary" block @click="OpenStructureViewerTool">Structure Viewer</v-btn> -->
         <v-btn style="margin-bottom:10px" color="primary" block @click="OpenSelectorGeneratorTool">Selector Generator</v-btn>
         <!-- <v-btn style="margin-bottom:10px" color="primary" block @click="OpenTroubleshooterTool">FAQ Troubleshooter</v-btn> -->
-        <!-- <v-btn style="margin-bottom:10px" color="primary" block @click="OpenRecipeGeneratorTool">Recipe Generator</v-btn> -->
+        <v-btn style="margin-bottom:10px" color="primary" block @click="OpenRecipeGeneratorTool">Recipe Generator</v-btn>
+        <!-- <v-btn style="margin-bottom:10px" color="primary" block @click="OpenJSONUITool">JSON-UI Generator</v-btn>
+        <v-btn style="margin-bottom:10px" color="primary" block @click="OpenLiveHelp">Live Help</v-btn> -->
     </v-container>
 </template>
 
 <script>
 import { ContentTab, addTab, Tab, getCurrentTabSystem } from "@bridge/tab";
-import { Loop, Id, RawText, ScriptUI, RenderOffset, StructureViewer, Selector, TroubleShooter, Recipe } from "@bridge/ui";
+import { Loop, Id, RawText, ScriptUI, RenderOffset, StructureViewer, Selector, TroubleShooter, Recipe, JSONUI, LiveHelp } from "@bridge/ui";
 import { readdir } from "@bridge/fs";
 
 //ESM Import for local script files do not work. Please check issue #596
@@ -63,12 +65,15 @@ export default
         OpenRecipeGeneratorTool()
         {
             addTab(new RecipeTab(getCurrentTabSystem()));
+        },
+        OpenJSONUITool() {
+            addTab(new JSONUITab(getCurrentTabSystem()));
+        },
+        OpenLiveHelp() {
+            addTab(new LiveHelpTab(getCurrentTabSystem()));
         }
     }
 }
-
-//ContentTab is broken. Please check issue #595
-//https://github.com/bridge-core/editor/issues/595
 
 class LoopTab extends ContentTab
 {
@@ -241,4 +246,42 @@ class RecipeTab extends ContentTab
     }
 }
 
+
+class JSONUITab extends ContentTab
+{
+    component = JSONUI;
+    type = "JSONUITab";
+
+    async isFor() {
+        return false
+    }
+    get icon() {
+        return 'mdi-tools'
+    }
+    get iconColor() {
+        return 'warning'
+    }
+    get name() {
+        return 'JSON UI Generator'
+    }
+}
+
+class LiveHelpTab extends ContentTab
+{
+    component = LiveHelp;
+    type = "LiveHelpTab";
+
+    async isFor() {
+        return false
+    }
+    get icon() {
+        return 'mdi-tools'
+    }
+    get iconColor() {
+        return 'warning'
+    }
+    get name() {
+        return 'Live Help'
+    }
+}
 </script>
